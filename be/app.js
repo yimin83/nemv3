@@ -41,3 +41,37 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+const mongoose = require('mongoose')
+const User = require('./modules/users')
+
+mongoose.connect('mongodb://localhost:27017', (err) => {
+  if(err) return console.error(err)
+  console.log('mongoose connection!')
+  User.deleteMany()
+    .then(r=>console.log(r))
+    .catch(e => console.error(e))
+
+  // User.create({name:'하하'})
+  //   .then(r=>console.log(r))
+  //   .catch(e => console.error(e))
+  // User.find()
+  //    .then(r=>console.log(r))
+  //    .catch(e => console.error(e))
+  // User.updateOne({_id:'5cd0e75be9b5d333844330f8'}, {$set:{age:33}})
+  //   .then(r=>{
+  //     console.log(r)
+  //     console.log('updated')
+  //     return User.find()
+  //   })
+  //   .then(r=> console.log(r))
+  //   .catch(e => console.error(e))
+  // User.deleteOne({name:'하하'})
+  //   .then(r=>{
+  //      console.log(r)
+  //      console.log('deleted')
+  //      return User.find()
+  //    })
+  //    .then(r=> console.log(r))
+  //    .catch(e => console.error(e))
+})
