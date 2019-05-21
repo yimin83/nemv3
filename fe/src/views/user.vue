@@ -218,7 +218,7 @@ export default {
           console.error(e.message)
         })
     },
-    delReq () {
+    delReq () { 
       axios.delete('/api/user?user=delMan')
         .then((r) => {
           this.delMd = JSON.stringify(r.data)
