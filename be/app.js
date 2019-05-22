@@ -75,3 +75,5 @@ mongoose.connect('mongodb://localhost:27017', (err) => {
   //    .then(r=> console.log(r))
   //    .catch(e => console.error(e))
 })
+
+console.log(process.env.NODE_ENV)
