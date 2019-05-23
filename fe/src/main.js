@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
+console.log(process.env.NODE_ENV)
+Vue.prototype.$apiRootPath = process.env.NODE_ENV !== 'production' ? 'http://localhost/api/' : '/api/'
 
 new Vue({
   router,
