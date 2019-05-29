@@ -10,30 +10,41 @@
         <v-card height="100%">
           <div v-if="x == 1">
             <v-img
-              :src="image2_src"
-              height="100px"
+              :src="image1_src"
+              height="130px"
+            >
+            </v-img>
+          </div>
+          <div v-else-if="x==3">
+            <v-img
+              :src="image3_src"
+              height="130px"
             >
             </v-img>
           </div>
           <div v-else>
             <v-img
-              :src="image1_src"
-              height="100px"
+              :src="image2_src"
+              height="130px"
             >
             </v-img>
           </div>
 
           <v-card-title primary-title>
             <div>
-              <!--<v-chip v-if="x == 1">{{x}}</v-chip>-->
-              <div class="headline">Top western road trips</div>
+              <!--<v-chip v-if="x == 1">{{x}}</v-chip>
+              <div class="headline">Top western road trips</div>-->
               <span class="grey--text">1,000 miles of wonder</span>
             </div>
           </v-card-title>
 
           <v-card-actions>
-            <v-btn flat>Share</v-btn>
-            <v-btn flat color="purple">Explore</v-btn>
+            <v-btn fab dark small left color="primary">
+              <v-icon dark>today</v-icon>
+            </v-btn>
+            <v-btn fab dark small left color="primary">
+              <v-icon dark>wb_sunny</v-icon>
+            </v-btn>
             <v-spacer></v-spacer>
             <v-btn icon @click="show = !show"><!-- 토글처리-->
               <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
