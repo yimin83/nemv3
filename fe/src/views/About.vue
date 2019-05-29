@@ -6,17 +6,26 @@
       v-model="ta"
     ></v-textarea>
     <v-layout row wrap>
-      <v-flex xs12 sm6 md4 lg3 xl2 v-for="x in ($vuetify.breakpoint.xs ? 1 : 4)">
+      <v-flex xs6 sm4 md3 lg2 xl1 v-for="x in ($vuetify.breakpoint.xs ? 1 : 4)">
         <v-card height="100%">
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-            height="200px"
-          >
-          </v-img>
+          <div v-if="x == 1">
+            <v-img
+              :src="image2_src"
+              height="100px"
+            >
+            </v-img>
+          </div>
+          <div v-else>
+            <v-img
+              :src="image1_src"
+              height="100px"
+            >
+            </v-img>
+          </div>
 
           <v-card-title primary-title>
             <div>
-              <v-chip v-if="x == 1">{{x}}</v-chip>
+              <!--<v-chip v-if="x == 1">{{x}}</v-chip>-->
               <div class="headline">Top western road trips</div>
               <span class="grey--text">1,000 miles of wonder</span>
             </div>
@@ -48,7 +57,10 @@ export default {
   data () {
     return {
       ta:'debug',
-      show: false
+      show: false,
+      image1_src: require("../../images/18pyeong.jpg"),
+      image2_src: require("../../images/25pyeong.jpg"),
+      image3_src: require("../../images/30pyeong.jpg")
     }
   },
   mounted () {
