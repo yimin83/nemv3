@@ -82,37 +82,30 @@ export default {
       items:[
         {
           icon:'bubble_chart',
-          title:'Inspire',
+          title:'메인',
           to:{
             path:'/'
           }
         },
         {
           icon:'favorite',
-          title:'about',
+          title:'객실예약',
           to:{
             path:'/about'
           }
         },
         {
           icon:'help',
-          title:'help',
+          title:'이력',
           to:{
             path:'/help'
-          }
-        },
-        {
-          icon:'person',
-          title:'user',
-          to:{
-            path:'/user'
           }
         }
       ],
       miniVariant:false,
       right:true,
       rightDrawer:false,
-      title:'Vuetify.js'
+      title:'객실예약시스템'
     }
   }
 }

@@ -4121,6 +4121,17 @@ grpc@1.20.3:
     node-pre-gyp "^0.13.0"
     protobufjs "^5.0.3"
 
+grpc@^1.21.1:
+  version "1.21.1"
+  resolved "https://registry.yarnpkg.com/grpc/-/grpc-1.21.1.tgz#541c0f4bccffcf6aef200536179594633d4579cf"
+  integrity sha512-PFsZQazf62nP05a0xm23mlImMuw5oVlqF/0zakmsdqJgvbABe+d6VThY2PfhqJmWEL/FhQ6QNYsxS5EAM6++7g==
+  dependencies:
+    lodash.camelcase "^4.3.0"
+    lodash.clone "^4.5.0"
+    nan "^2.13.2"
+    node-pre-gyp "^0.13.0"
+    protobufjs "^5.0.3"
+
 gzip-size@^5.0.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.1.0.tgz#2db0396c71f5c902d5cf6b52add5030b93c99bd2"

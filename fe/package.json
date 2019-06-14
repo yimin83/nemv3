@@ -11,9 +11,14 @@
     "@babel/polyfill": "^7.0.0-rc.1",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "date-fns": "^1.30.1",
     "firebase": "^6.0.4",
+    "grpc": "^1.21.1",
     "react": "^16.8.6",
     "vue": "^2.6.10",
+    "vue-date-picker": "^2.5.0",
+    "vue-date-time-picker": "^0.1.1",
+    "vue-moment": "^4.0.0",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.5",
     "vuex": "^3.0.1"
@@ -30,5 +35,7 @@
     "vue-template-compiler": "^2.5.21"
   },
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "## Project setup ``` yarn install ```",
+  "author": ""
 }
