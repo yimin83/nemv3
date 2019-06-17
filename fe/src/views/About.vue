@@ -1,9 +1,135 @@
 <template>
   <v-container grid-list-md text-xs-center>
-    <v-textarea
-      outline
-      v-model="ta"
-    ></v-textarea>
+
+    <v-divider class="my-3"></v-divider>
+    <v-subheader>베스트룸</v-subheader>
+    <v-layout row justify-center>
+      <v-flex
+          v-for="room in rooms"
+          :key="room"
+          xs12 sm6 md4 lg2 xl1
+        >
+        <v-card v-if="room.beBestRoom == true"  style="width:170px">
+          <div v-if="room.type == 18">
+            <div v-if="room.beReserved == false">
+              <v-img
+                :src="image1_src"
+                height="130px"
+                width="170px"
+                @click="reserveRoom(room.roomNo);"
+              >
+              </v-img>
+            </div>
+            <div v-else>
+              <v-img
+                :src="image1_src"
+                height="130px"
+                width="170px"
+                @click="reserveRoom(room.roomNo);"
+              >
+                <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                  <v-layout fill-height>
+                    <v-flex xs12 align-end flexbox>
+                      <span class="headline">예약완료</span>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-img>
+            </div>
+          </div>
+          <div v-else-if="room.type == 30">
+            <div v-if="room.beReserved == false">
+              <v-img
+                :src="image3_src"
+                height="130px"
+                width="170px"
+                @click="reserveRoom(room.roomNo);"
+              >
+              </v-img>
+            </div>
+            <div v-else>
+              <v-img
+                :src="image3_src"
+                height="130px"
+                width="170px"
+                @click="reserveRoom(room.roomNo);"
+              >
+                <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                  <v-layout fill-height>
+                    <v-flex xs12 align-end flexbox>
+                      <span class="headline">예약완료</span>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-img>
+            </div>
+          </div>
+          <div v-else>
+            <div v-if="room.beReserved == false">
+              <v-img
+                :src="image2_src"
+                height="130px"
+                width="170px"
+                @click="reserveRoom(room.roomNo);"
+              >
+              </v-img>
+            </div>
+            <div v-else>
+              <v-img
+                :src="image2_src"
+                height="130px"
+                width="170px"
+                @click="reserveRoom(room.roomNo);"
+              >
+                <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                  <v-layout fill-height>
+                    <v-flex xs12 align-end flexbox>
+                      <span class="headline">예약완료</span>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-img>
+            </div>
+          </div>
+          <v-card-actions>
+            <v-btn fab dark small left color="primary"  @click="reserveRoom(room.roomNo);">
+              <v-icon dark>event_available</v-icon>
+            </v-btn>
+            <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
+              <v-icon dark>wb_sunny</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="upDownIcon(room.roomNo);">
+              <v-icon>{{ room.togle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-slide-y-transition>
+            <v-card-text v-show="room.togle">
+              <div v-if="room.beReserved == false" wrap>
+                <span>
+                  예약일 : - <br>
+                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
+              </span>
+              </div>
+              <div v-else style="margin:auto" wrap>
+                <span>
+                  예약일 : {{room.startDate}} ~ {{room.endDate}} <br>
+                  예약인원 : {{room.peopleCnt}} 명 <br>
+                  입실시간 : {{room.inTime}} <br>
+                  퇴실시간 : {{room.outTime}} <br>
+                  접수일 : {{room.resDate}} <br>
+                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                </span>
+              </div>
+            </v-card-text>
+          </v-slide-y-transition>
+        </v-card>
+      </v-flex>
+    </v-layout>
+
+
+    <v-divider class="my-3"></v-divider>
+    <v-subheader>전체룸</v-subheader>
     <v-layout row wrap>
       <v-flex
           v-for="room in rooms"
@@ -362,12 +488,12 @@ export default {
       roomTitle: '예약 정보',
       settingTitle : '설정',
       rooms: [
-        { roomNo: 101, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234',resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
+        { roomNo: 101, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234',resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:true},
         { roomNo: 102, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
         { roomNo: 103, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 104, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
+        { roomNo: 104, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:true},
         { roomNo: 105, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt:5,  startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 106, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt:4,  startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle : false, beSmart:true, beBestRoom:false},
+        { roomNo: 106, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt:4,  startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle : false, beSmart:true, beBestRoom:true},
         { roomNo: 201, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234',resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
         { roomNo: 202, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
         { roomNo: 203, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
