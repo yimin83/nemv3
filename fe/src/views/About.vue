@@ -3,19 +3,18 @@
 
     <v-divider class="my-3"></v-divider>
     <v-subheader>베스트룸</v-subheader>
-    <v-layout row justify-center>
+    <v-layout row>
       <v-flex
           v-for="room in rooms"
           :key="room"
           xs12 sm6 md4 lg2 xl1
         >
-        <v-card v-if="room.beBestRoom == true"  style="width:170px">
+        <v-card v-if="room.beBestRoom == true" style="border:block;">
           <div v-if="room.type == 18">
             <div v-if="room.beReserved == false">
               <v-img
                 :src="image1_src"
                 height="130px"
-                width="170px"
                 @click="reserveRoom(room.roomNo);"
               >
               </v-img>
@@ -24,7 +23,6 @@
               <v-img
                 :src="image1_src"
                 height="130px"
-                width="170px"
                 @click="reserveRoom(room.roomNo);"
               >
                 <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
@@ -42,7 +40,6 @@
               <v-img
                 :src="image3_src"
                 height="130px"
-                width="170px"
                 @click="reserveRoom(room.roomNo);"
               >
               </v-img>
@@ -51,7 +48,6 @@
               <v-img
                 :src="image3_src"
                 height="130px"
-                width="170px"
                 @click="reserveRoom(room.roomNo);"
               >
                 <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
@@ -69,7 +65,6 @@
               <v-img
                 :src="image2_src"
                 height="130px"
-                width="170px"
                 @click="reserveRoom(room.roomNo);"
               >
               </v-img>
@@ -78,7 +73,6 @@
               <v-img
                 :src="image2_src"
                 height="130px"
-                width="170px"
                 @click="reserveRoom(room.roomNo);"
               >
                 <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
@@ -126,8 +120,6 @@
         </v-card>
       </v-flex>
     </v-layout>
-
-
     <v-divider class="my-3"></v-divider>
     <v-subheader>전체룸</v-subheader>
     <v-layout row wrap>
@@ -374,7 +366,7 @@
               <v-flex xs12 sm6 md4>
                 <v-text-field
                   label="예약자 이름"
-                  hint=""
+                  hint=''
                   persistent-hint
                   required
                   v-model="roomInfo.subsName"
@@ -383,7 +375,7 @@
               <v-flex xs12 sm6 md4>
                 <v-text-field
                   label="예약자 연락처"
-                  hint=""
+                  hint=''
                   persistent-hint
                   required
                   v-model="roomInfo.subsTel"
@@ -392,7 +384,7 @@
               <v-flex xs12 sm6 md4>
                 <v-text-field
                   label="투숙객 수"
-                  hint=""
+                  hint=''
                   persistent-hint
                   required
                   v-model="roomInfo.peopleCnt"
@@ -436,7 +428,7 @@
                 <div v-if="smartChkbox == false">
                   <v-text-field
                     label="설정온도"
-                    hint=""
+                    hint=''
                     persistent-hint
                     required
                     v-model="roomInfo.setTemp"
@@ -445,7 +437,7 @@
                 <div v-else>
                   <v-text-field
                     label="스마트온도"
-                    hint=""
+                    hint=''
                     persistent-hint
                     required
                     readonly
@@ -466,54 +458,53 @@
   </v-container>
 </template>
 <script>
-//import SweetCalendar from 'vue-sweet-calendar'
-//import 'vue-sweet-calendar/dist/SweetCalendar.css'
-import moment from 'moment'
-import format from 'date-fns/format'
+// import SweetCalendar from 'vue-sweet-calendar'
+// import 'vue-sweet-calendar/dist/SweetCalendar.css'
+// import moment from 'moment'
+// import format from 'date-fns/format'
 export default {
   el: '#key-example',
   name: 'about',
   data () {
     return {
-      ta:'debug',
       show: false,
       rsvRoomModal: false,
       settingRoomModal: false,
-      bestChkbox:false,
-      smartChkbox:false,
-      image1_src: require("../../images/18pyeong.jpg"),
-      image2_src: require("../../images/25pyeong.jpg"),
-      image3_src: require("../../images/30pyeong.jpg"),
+      bestChkbox: false,
+      smartChkbox: false,
+      image1_src: require('../../images/18pyeong.jpg'),
+      image2_src: require('../../images/25pyeong.jpg'),
+      image3_src: require('../../images/30pyeong.jpg'),
       curTemp: 'username',
       roomTitle: '예약 정보',
-      settingTitle : '설정',
+      settingTitle: '설정',
       rooms: [
-        { roomNo: 101, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234',resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:true},
-        { roomNo: 102, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 103, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 104, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:true},
-        { roomNo: 105, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt:5,  startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 106, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt:4,  startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle : false, beSmart:true, beBestRoom:true},
-        { roomNo: 201, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234',resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 202, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 203, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 204, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 205, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt:5,  startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 206, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt:4,  startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 301, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234',resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 302, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 303, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 304, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt:2,  startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 305, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt:5,  startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle : false, beSmart:true, beBestRoom:false},
-        { roomNo: 306, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt:4,  startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle : false, beSmart:true, beBestRoom:false}
+        { roomNo: 101, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: true },
+        { roomNo: 102, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 103, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 104, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: true },
+        { roomNo: 105, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt: 5, startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 106, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt: 4, startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle: false, beSmart: true, beBestRoom: true },
+        { roomNo: 201, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 202, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 203, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 204, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 205, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt: 5, startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 206, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt: 4, startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 301, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 302, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 303, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 304, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 305, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt: 5, startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 306, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt: 4, startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle: false, beSmart: true, beBestRoom: false }
       ],
       roomInfo: {
         roomNo: 101,
         type: 18,
         pos: 'sea',
-        setTemp:0,
+        setTemp: 0,
         beReserved: false,
-        peopleCnt:0,
+        peopleCnt: 0,
         startDate: ' ',
         endDate: ' ',
         inTime: ' ',
@@ -533,102 +524,92 @@ export default {
     }
   },
   mounted () {
-    //const a = { a: 1, b: 2}
-    this.ta = "즐겨찾기 목록"
-    startDate = new Date().toISOString().substr(0, 10)
-    endDate = new Date().toISOString().substr(0, 10)
-    //console.log(this.$vuetify.breakpoint)
+    // const a = { a: 1, b: 2}
+    this.ta = '즐겨찾기 목록'
+    this.startDate = new Date().toISOString().substr(0, 10)
+    this.endDate = new Date().toISOString().substr(0, 10)
+    // console.log(this.$vuetify.breakpoint)
   },
   methods: {
-    upDownIcon: function (roomNo){
-      for(var i=0;i<this.rooms.length;i++)
-      {
-        if(this.rooms[i].roomNo === roomNo)
-        {
+    upDownIcon: function (roomNo) {
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].roomNo === roomNo) {
           this.rooms[i].togle = !this.rooms[i].togle
-          break;
+          break
         }
       }
     },
-    reserveRoom: function (roomNo){
-      this.roomInfo.roomNo=0
-      this.roomInfo.type=0
-      this.roomInfo.pos=""
-      this.roomInfo.smartTemp=0
-      this.roomInfo.setTemp=0
-      this.roomInfo.beReserved=false
-      this.roomInfo.peopleCnt=0
-      this.roomInfo.startDate=""
-      this.roomInfo.endDate=""
-      this.roomInfo.inTime=""
-      this.roomInfo.outTime=""
-      this.roomInfo.subsName=""
-      this.roomInfo.subsTel=""
-      this.startDate=new Date().toISOString().substr(0, 10)
-      this.endDate=new Date().toISOString().substr(0, 10)
-      this.inTime=null
-      this.outTime=null
-      this.roomInfo.beSmart=false
-      this.roomInfo.beBestRoom=false
-      for(var i=0;i<this.rooms.length;i++)
-      {
-        if(this.rooms[i].roomNo === roomNo)
-        {
-          this.roomInfo.roomNo=this.rooms[i].roomNo
+    reserveRoom: function (roomNo) {
+      this.roomInfo.roomNo = 0
+      this.roomInfo.type = 0
+      this.roomInfo.pos = ''
+      this.roomInfo.smartTemp = 0
+      this.roomInfo.setTemp = 0
+      this.roomInfo.beReserved = false
+      this.roomInfo.peopleCnt = 0
+      this.roomInfo.startDate = ''
+      this.roomInfo.endDate = ''
+      this.roomInfo.inTime = ''
+      this.roomInfo.outTime = ''
+      this.roomInfo.subsName = ''
+      this.roomInfo.subsTel = ''
+      this.startDate = new Date().toISOString().substr(0, 10)
+      this.endDate = new Date().toISOString().substr(0, 10)
+      this.inTime = null
+      this.outTime = null
+      this.roomInfo.beSmart = false
+      this.roomInfo.beBestRoom = false
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].roomNo === roomNo) {
+          this.roomInfo.roomNo = this.rooms[i].roomNo
           this.roomInfo.type = this.rooms[i].type
           this.roomInfo.pos = this.rooms[i].pos
-          this.roomInfo.beSmart=this.rooms[i].beSmart
-          this.roomInfo.beBestRoom=this.rooms[i].beBestRoom
-          this.roomInfo.setTemp=this.rooms[i].setTemp
-          this.roomInfo.smartTemp=this.rooms[i].smartTemp
-          if(this.rooms[i].beReserved == false)
-            break;
+          this.roomInfo.beSmart = this.rooms[i].beSmart
+          this.roomInfo.beBestRoom = this.rooms[i].beBestRoom
+          this.roomInfo.setTemp = this.rooms[i].setTemp
+          this.roomInfo.smartTemp = this.rooms[i].smartTemp
+          if (this.rooms[i].beReserved === false) { break }
           this.roomInfo.beReserved = this.rooms[i].beReserved
-          this.roomInfo.peopleCnt=this.rooms[i].peopleCnt
+          this.roomInfo.peopleCnt = this.rooms[i].peopleCnt
           this.startDate = new Date(this.rooms[i].startDate).toISOString().substr(0, 10)
           this.endDate = new Date(this.rooms[i].endDate).toISOString().substr(0, 10)
           this.roomInfo.startDate = this.rooms[i].startDate
           this.roomInfo.endDate = this.rooms[i].endDate
-          this.inTime=this.rooms[i].inTime
-          this.outTime=this.rooms[i].outTime
+          this.inTime = this.rooms[i].inTime
+          this.outTime = this.rooms[i].outTime
           this.roomInfo.inTime = this.rooms[i].inTime
           this.roomInfo.outTime = this.rooms[i].outTime
           this.roomInfo.subsName = this.rooms[i].subsName
           this.roomInfo.subsTel = this.rooms[i].subsTel
-          break;
+          break
         }
       }
-      this.$data.rsvRoomModal = true;
-
+      this.$data.rsvRoomModal = true
     },
-    settingRoom: function (roomNo){
-      this.roomInfo.beSmart=false
-      this.roomInfo.beBestRoom=false
-      this.roomInfo.smartTemp=0
-      this.roomInfo.setTemp=0
+    settingRoom: function (roomNo) {
+      this.roomInfo.beSmart = false
+      this.roomInfo.beBestRoom = false
+      this.roomInfo.smartTemp = 0
+      this.roomInfo.setTemp = 0
       this.bestChkbox = false
       this.smartChkbox = false
-      for(var i=0;i<this.rooms.length;i++)
-      {
-        if(this.rooms[i].roomNo === roomNo)
-        {
-          this.roomInfo.roomNo=this.rooms[i].roomNo
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].roomNo === roomNo) {
+          this.roomInfo.roomNo = this.rooms[i].roomNo
           this.roomInfo.type = this.rooms[i].type
           this.roomInfo.pos = this.rooms[i].pos
           this.bestChkbox = this.rooms[i].beBestRoom
           this.smartChkbox = this.rooms[i].beSmart
-          this.roomInfo.smartTemp=this.rooms[i].smartTemp
+          this.roomInfo.smartTemp = this.rooms[i].smartTemp
           this.roomInfo.setTemp = this.rooms[i].setTemp
-          break;
+          break
         }
       }
-      this.$data.settingRoomModal = true;
+      this.$data.settingRoomModal = true
     },
-    saveReserveRoom(roomNo) {
-      for(var i=0;i<this.rooms.length;i++)
-      {
-        if(this.rooms[i].roomNo === roomNo)
-        {
+    saveReserveRoom: function (roomNo) {
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].roomNo === roomNo) {
           this.rooms[i].beReserved = true
           this.rooms[i].peopleCnt = this.roomInfo.peopleCnt
           this.rooms[i].startDate = this.startDate
@@ -637,26 +618,24 @@ export default {
           this.rooms[i].outTime = this.outTime
           this.rooms[i].subsName = this.roomInfo.subsName
           this.rooms[i].subsTel = this.roomInfo.subsTel
-          break;
+          break
         }
       }
-      this.$data.rsvRoomModal = false;
+      this.$data.rsvRoomModal = false
     },
-    saveSettingRoom(roomNo) {
-      for(var i=0;i<this.rooms.length;i++)
-      {
-        if(this.rooms[i].roomNo === roomNo)
-        {
+    saveSettingRoom: function (roomNo) {
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].roomNo === roomNo) {
           this.rooms[i].beSmart = this.smartChkbox
           this.rooms[i].beBestRoom = this.bestChkbox
           this.rooms[i].setTemp = this.roomInfo.setTemp
-          break;
+          break
         }
       }
-      this.$data.settingRoomModal = false;
+      this.$data.settingRoomModal = false
     },
-    setTemp: function (roomNo){
-      alert("setTemp " + roomNo)
+    setTemp: function (roomNo) {
+      alert('setTemp ' + roomNo)
     }
   }
 }
