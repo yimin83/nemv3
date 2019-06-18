@@ -76,36 +76,36 @@ export default {
   name: 'App',
   data () {
     return {
-      clipped:false,
-      drawer:true,
-      fixed:false,
-      items:[
+      clipped: false,
+      drawer: true,
+      fixed: false,
+      items: [
         {
-          icon:'bubble_chart',
-          title:'메인',
-          to:{
-            path:'/'
+          icon: 'bubble_chart',
+          title: '메인',
+          to: {
+            path: '/'
           }
         },
         {
-          icon:'favorite',
-          title:'객실예약',
-          to:{
-            path:'/about'
+          icon: 'favorite',
+          title: '객실예약',
+          to: {
+            path: '/about'
           }
         },
         {
-          icon:'help',
-          title:'이력',
-          to:{
-            path:'/help'
+          icon: 'help',
+          title: '이력',
+          to: {
+            path: '/help'
           }
         }
       ],
-      miniVariant:false,
-      right:true,
-      rightDrawer:false,
-      title:'객실예약시스템'
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: '객실예약시스템'
     }
   }
 }

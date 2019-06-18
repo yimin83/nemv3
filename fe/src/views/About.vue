@@ -1,136 +1,147 @@
 <template>
   <v-container grid-list-md text-xs-center>
-
     <v-divider class="my-3"></v-divider>
     <v-subheader>베스트룸</v-subheader>
-    <v-layout row>
+    <v-layout row wrap justify-center>
       <v-flex
-          v-for="room in rooms"
+          v-for="room in rooms" v-if="room.beBestRoom == true"
           :key="room"
-          xs12 sm6 md4 lg2 xl1
+          xs10 sm6 md4 lg2 xl2
+          text-xs-center
         >
-        <v-card v-if="room.beBestRoom == true" style="border:block;">
-          <div v-if="room.type == 18">
-            <div v-if="room.beReserved == false">
-              <v-img
-                :src="image1_src"
-                height="130px"
-                @click="reserveRoom(room.roomNo);"
-              >
-              </v-img>
-            </div>
-            <div v-else>
-              <v-img
-                :src="image1_src"
-                height="130px"
-                @click="reserveRoom(room.roomNo);"
-              >
-                <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
-                  <v-layout fill-height>
-                    <v-flex xs12 align-end flexbox>
-                      <span class="headline">예약완료</span>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-img>
-            </div>
-          </div>
-          <div v-else-if="room.type == 30">
-            <div v-if="room.beReserved == false">
-              <v-img
-                :src="image3_src"
-                height="130px"
-                @click="reserveRoom(room.roomNo);"
-              >
-              </v-img>
-            </div>
-            <div v-else>
-              <v-img
-                :src="image3_src"
-                height="130px"
-                @click="reserveRoom(room.roomNo);"
-              >
-                <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
-                  <v-layout fill-height>
-                    <v-flex xs12 align-end flexbox>
-                      <span class="headline">예약완료</span>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-img>
-            </div>
-          </div>
-          <div v-else>
-            <div v-if="room.beReserved == false">
-              <v-img
-                :src="image2_src"
-                height="130px"
-                @click="reserveRoom(room.roomNo);"
-              >
-              </v-img>
-            </div>
-            <div v-else>
-              <v-img
-                :src="image2_src"
-                height="130px"
-                @click="reserveRoom(room.roomNo);"
-              >
-                <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
-                  <v-layout fill-height>
-                    <v-flex xs12 align-end flexbox>
-                      <span class="headline">예약완료</span>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-img>
-            </div>
-          </div>
-          <v-card-actions>
-            <v-btn fab dark small left color="primary"  @click="reserveRoom(room.roomNo);">
-              <v-icon dark>event_available</v-icon>
-            </v-btn>
-            <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
-              <v-icon dark>wb_sunny</v-icon>
-            </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon @click="upDownIcon(room.roomNo);">
-              <v-icon>{{ room.togle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
-            </v-btn>
-          </v-card-actions>
-          <v-slide-y-transition>
-            <v-card-text v-show="room.togle">
-              <div v-if="room.beReserved == false" wrap>
-                <span>
-                  예약일 : - <br>
-                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
-              </span>
+        <v-item>
+          <v-card>
+            <div v-if="room.type == 18">
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image1_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
               </div>
-              <div v-else style="margin:auto" wrap>
-                <span>
-                  예약일 : {{room.startDate}} ~ {{room.endDate}} <br>
-                  예약인원 : {{room.peopleCnt}} 명 <br>
-                  입실시간 : {{room.inTime}} <br>
-                  퇴실시간 : {{room.outTime}} <br>
-                  접수일 : {{room.resDate}} <br>
-                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+              <div v-else>
+                <v-img
+                  :src="image1_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            <div v-else-if="room.type == 30">
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image3_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image3_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            <div v-else>
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image2_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image2_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            <v-card-title primary-title>
+              <div style="margin:auto">
+                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-btn fab dark small left color="primary"  @click="reserveRoom(room.roomNo);">
+                <v-icon dark>event_available</v-icon>
+              </v-btn>
+              <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
+                <v-icon dark>wb_sunny</v-icon>
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="upDownBestIcon(room.roomNo);">
+                <v-icon>{{ room.bestTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+              </v-btn>
+            </v-card-actions>
+            <v-slide-y-transition>
+              <v-card-text v-show="room.bestTogle">
+                <div v-if="room.beReserved == false">
+                  <span>
+                    예약일 : - <br>
+                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
                 </span>
-              </div>
-            </v-card-text>
-          </v-slide-y-transition>
-        </v-card>
+                </div>
+                <div v-else style="margin:auto">
+                  <span>
+                    예약일 : {{room.startDate}} ~ {{room.endDate}} <br>
+                    예약인원 : {{room.peopleCnt}} 명 <br>
+                    입실시간 : {{room.inTime}} <br>
+                    퇴실시간 : {{room.outTime}} <br>
+                    접수일 : {{room.resDate}} <br>
+                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                  </span>
+                </div>
+              </v-card-text>
+            </v-slide-y-transition>
+          </v-card>
+        </v-item>
       </v-flex>
     </v-layout>
     <v-divider class="my-3"></v-divider>
-    <v-subheader>전체룸</v-subheader>
+    <v-subheader>3층</v-subheader>
+    <v-divider class="my-1"></v-divider>
     <v-layout row wrap>
       <v-flex
-          v-for="room in rooms"
+          v-for="room in rooms" v-if="room.roomNo < 1501"
           :key="room"
-          xs12 sm6 md4 lg2 xl1
+          xs10 sm6 md4 lg2 xl2
         >
         <v-item>
           <v-card>
             <v-scroll-y-transition>
+            <div v-if="room.roomN0 == 1501">
+              <v-divider class="my-3"></v-divider>
+            </div>
             <div v-if="room.type == 18">
               <div v-if="room.beReserved == false">
                 <v-img
@@ -207,6 +218,11 @@
               </div>
             </div>
             </v-scroll-y-transition>
+            <v-card-title primary-title>
+              <div style="margin:auto">
+                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+              </div>
+            </v-card-title>
             <v-card-actions>
               <v-btn fab dark small left color="primary"  @click="reserveRoom(room.roomNo);">
                 <v-icon dark>event_available</v-icon>
@@ -241,7 +257,267 @@
         </v-item>
       </v-flex>
     </v-layout>
-    <v-dialog v-model="rsvRoomModal" max-width="500px">
+    <v-divider class="my-3"></v-divider>
+    <v-subheader>5층</v-subheader>
+    <v-divider class="my-1"></v-divider>
+    <v-layout row wrap>
+      <v-flex
+          v-for="room in rooms" v-if="room.roomNo < 1601"
+          :key="room"
+          xs10 sm6 md4 lg2 xl2
+        >
+        <v-item>
+          <v-card>
+            <v-scroll-y-transition>
+            <div v-if="room.roomN0 == 1501">
+              <v-divider class="my-3"></v-divider>
+            </div>
+            <div v-if="room.type == 18">
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image1_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image1_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            <div v-else-if="room.type == 30">
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image3_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image3_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            <div v-else>
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image2_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image2_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            </v-scroll-y-transition>
+            <v-card-title primary-title>
+              <div style="margin:auto">
+                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-btn fab dark small left color="primary"  @click="reserveRoom(room.roomNo);">
+                <v-icon dark>event_available</v-icon>
+              </v-btn>
+              <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
+                <v-icon dark>wb_sunny</v-icon>
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="upDownIcon(room.roomNo);">
+                <v-icon>{{ room.togle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+              </v-btn>
+            </v-card-actions>
+            <v-slide-y-transition>
+              <v-card-text v-show="room.togle">
+                <div v-if="room.beReserved == false" >
+                  예약일 : - <br>
+                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
+                </div>
+                <div v-else style="margin:auto">
+                  <span>
+                    예약일 : {{room.startDate}} ~ {{room.endDate}} <br>
+                    예약인원 : {{room.peopleCnt}} 명 <br>
+                    입실시간 : {{room.inTime}} <br>
+                    퇴실시간 : {{room.outTime}} <br>
+                    접수일 : {{room.resDate}} <br>
+                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                  </span>
+                </div>
+              </v-card-text>
+            </v-slide-y-transition>
+          </v-card>
+        </v-item>
+      </v-flex>
+    </v-layout>
+    <v-divider class="my-3"></v-divider>
+    <v-subheader>6층</v-subheader>
+    <v-divider class="my-1"></v-divider>
+    <v-layout row wrap>
+      <v-flex
+          v-for="room in rooms" v-if="room.roomNo >= 1601"
+          :key="room"
+          xs10 sm6 md4 lg2 xl2
+        >
+        <v-item>
+          <v-card>
+            <v-scroll-y-transition>
+            <div v-if="room.roomN0 == 1501">
+              <v-divider class="my-3"></v-divider>
+            </div>
+            <div v-if="room.type == 18">
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image1_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image1_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            <div v-else-if="room.type == 30">
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image3_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image3_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            <div v-else>
+              <div v-if="room.beReserved == false">
+                <v-img
+                  :src="image2_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                </v-img>
+              </div>
+              <div v-else>
+                <v-img
+                  :src="image2_src"
+                  height="130px"
+                  @click="reserveRoom(room.roomNo);"
+                >
+                  <v-container fill-height fluid style="background-color: rgba(255, 255, 255, 0.7);">
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span class="headline">예약완료</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-img>
+              </div>
+            </div>
+            </v-scroll-y-transition>
+            <v-card-title primary-title>
+              <div style="margin:auto">
+                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-btn fab dark small left color="primary"  @click="reserveRoom(room.roomNo);">
+                <v-icon dark>event_available</v-icon>
+              </v-btn>
+              <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
+                <v-icon dark>wb_sunny</v-icon>
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="upDownIcon(room.roomNo);">
+                <v-icon>{{ room.togle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+              </v-btn>
+            </v-card-actions>
+            <v-slide-y-transition>
+              <v-card-text v-show="room.togle">
+                <div v-if="room.beReserved == false" >
+                  예약일 : - <br>
+                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
+                </div>
+                <div v-else style="margin:auto">
+                  <span>
+                    예약일 : {{room.startDate}} ~ {{room.endDate}} <br>
+                    예약인원 : {{room.peopleCnt}} 명 <br>
+                    입실시간 : {{room.inTime}} <br>
+                    퇴실시간 : {{room.outTime}} <br>
+                    접수일 : {{room.resDate}} <br>
+                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                  </span>
+                </div>
+              </v-card-text>
+            </v-slide-y-transition>
+          </v-card>
+        </v-item>
+      </v-flex>
+    </v-layout>
+    <v-dialog v-model="rsvRoomModal" persistent max-width="500px">
       <v-card>
         <v-card-title>
           <span class="headline">{{roomTitle}}</span>
@@ -395,12 +671,17 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click="saveReserveRoom(roomInfo.roomNo)">저장</v-btn>
+          <div v-if="roomInfo.beReserved == false">
+            <v-btn color="blue darken-1" flat @click="saveReserveRoom(roomInfo.roomNo)">예약</v-btn>
+          </div>
+          <div v-else>
+            <v-btn color="blue darken-1" flat @click="cancelReserveRoom(roomInfo.roomNo)">예약취소</v-btn>
+          </div>
           <v-btn color="blue darken-1" flat @click.native="rsvRoomModal = false">닫기</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="settingRoomModal" persistent max-width="500px">
+    <v-dialog v-model="settingRoomModal" persistent  max-width="500px">
       <v-card>
         <v-card-title>
           <span class="headline">{{settingTitle}}</span>
@@ -413,10 +694,6 @@
                   v-model="bestChkbox"
                   :label="`베스트룸`"
                 ></v-checkbox>
-                <!-- <v-checkbox
-                  v-model="bestChkbox"
-                  :label="`Checkbox 1: ${checkbox.toString()}`"
-                ></v-checkbox> -->
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-checkbox
@@ -479,24 +756,84 @@ export default {
       roomTitle: '예약 정보',
       settingTitle: '설정',
       rooms: [
-        { roomNo: 101, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: true },
-        { roomNo: 102, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 103, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 104, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: true },
-        { roomNo: 105, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt: 5, startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 106, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt: 4, startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle: false, beSmart: true, beBestRoom: true },
-        { roomNo: 201, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 202, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 203, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 204, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 205, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt: 5, startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 206, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt: 4, startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 301, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '김철수', subsTel: '01012341234', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/09', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 302, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 303, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 304, type: 30, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '2019/06/03', peopleCnt: 2, startDate: '2019/06/06', endDate: '2019/06/06', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 305, type: 25, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '이영희', subsTel: '01056785678', resDate: '2019/06/01', peopleCnt: 5, startDate: '2019/06/08', endDate: '2019/06/10', inTime: '14:00:00', outTime: '12:00:00', togle: false, beSmart: true, beBestRoom: false },
-        { roomNo: 306, type: 18, pos: 'mountain', smartTemp: 23.0, setTemp: 25.0, beReserved: true, subsName: '홍길동', subsTel: '01012345678', resDate: '2019/06/02', peopleCnt: 4, startDate: '2019/06/10', endDate: '2019/06/15', inTime: '12:00:00', outTime: '10:00:00', togle: false, beSmart: true, beBestRoom: false }
+        { roomNo: 1301, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1302, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1303, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1304, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1305, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1306, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1307, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1308, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1309, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1310, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1311, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1312, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1313, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1314, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1315, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1316, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1317, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1318, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1319, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1320, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1321, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1322, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1323, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1324, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1325, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1501, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1502, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1503, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1504, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1505, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1506, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1507, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1508, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1509, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1510, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1511, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1512, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1513, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1514, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1515, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1516, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1517, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1518, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1519, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1520, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1521, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1522, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1523, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1524, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1525, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1526, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1601, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1602, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1603, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1604, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1605, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1606, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1607, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1608, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1609, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1610, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1611, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1612, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1613, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1614, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1615, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1616, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1617, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1618, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1619, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1620, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1621, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1622, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1623, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1624, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1625, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1626, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
+        { roomNo: 1627, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false }
       ],
       roomInfo: {
         roomNo: 101,
@@ -535,6 +872,14 @@ export default {
       for (var i = 0; i < this.rooms.length; i++) {
         if (this.rooms[i].roomNo === roomNo) {
           this.rooms[i].togle = !this.rooms[i].togle
+          break
+        }
+      }
+    },
+    upDownBestIcon: function (roomNo) {
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].roomNo === roomNo) {
+          this.rooms[i].bestTogle = !this.rooms[i].bestTogle
           break
         }
       }
@@ -618,6 +963,22 @@ export default {
           this.rooms[i].outTime = this.outTime
           this.rooms[i].subsName = this.roomInfo.subsName
           this.rooms[i].subsTel = this.roomInfo.subsTel
+          break
+        }
+      }
+      this.$data.rsvRoomModal = false
+    },
+    cancelReserveRoom: function (roomNo) {
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].roomNo === roomNo) {
+          this.rooms[i].beReserved = false
+          this.rooms[i].peopleCnt = 0
+          this.rooms[i].startDate = ''
+          this.rooms[i].endDate = ''
+          this.rooms[i].inTime = ''
+          this.rooms[i].outTime = ''
+          this.rooms[i].subsName = ''
+          this.rooms[i].subsTel = ''
           break
         }
       }
