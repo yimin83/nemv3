@@ -91,7 +91,7 @@ export default {
           icon: 'favorite',
           title: '객실예약',
           to: {
-            path: '/about'
+            path: '/rooms'
           }
         },
         {

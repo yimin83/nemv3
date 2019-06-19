@@ -16,6 +16,7 @@ app.use(cookieParser());
 app.use(cors()) // api위에서 cors를 사용하겠다고 선언
 // url /api로 접근시 처리
 app.use('/api', require('./routes/api'))
+//app.use('/rooms', require('./routes/api/rooms'))
 
 //fe의 yarn build 이후 생성되는 dist 폴더를 public 대신 설정하여
 // BackEnd와 FrontEnd를 연결한다.
@@ -52,28 +53,6 @@ mongoose.connect('mongodb://localhost:27017', (err) => {
     .then(r=>console.log(r))
     .catch(e => console.error(e))
 
-  // User.create({name:'하하'})
-  //   .then(r=>console.log(r))
-  //   .catch(e => console.error(e))
-  // User.find()
-  //    .then(r=>console.log(r))
-  //    .catch(e => console.error(e))
-  // User.updateOne({_id:'5cd0e75be9b5d333844330f8'}, {$set:{age:33}})
-  //   .then(r=>{
-  //     console.log(r)
-  //     console.log('updated')
-  //     return User.find()
-  //   })
-  //   .then(r=> console.log(r))
-  //   .catch(e => console.error(e))
-  // User.deleteOne({name:'하하'})
-  //   .then(r=>{
-  //      console.log(r)
-  //      console.log('deleted')
-  //      return User.find()
-  //    })
-  //    .then(r=> console.log(r))
-  //    .catch(e => console.error(e))
 })
 
 console.log(process.env.NODE_ENV)

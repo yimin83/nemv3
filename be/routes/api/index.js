@@ -14,6 +14,7 @@ router.post('/user', function(req, res, next) {
 })*/
 router.use('/test', require('./test'))
 router.use('/user', require('./user'))
+router.use('/rooms', require('./rooms'))
 
 router.all('*', function(req, res, next) {
   next(createError(404, '그런 api 없음'));
