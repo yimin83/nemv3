@@ -16,7 +16,7 @@
     "gyp": "^0.5.0",
     "http-error": "0.0.6",
     "http-errors": "^1.6.3",
-    "mongoose": "^5.6.0",
+    "mongoose": "^5.7.5",
     "morgan": "~1.9.0",
     "node-gyp": "^5.0.0",
     "pug": "^2.0.3",
