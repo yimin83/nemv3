@@ -18,7 +18,7 @@
     "vue": "^2.6.10",
     "vue-date-picker": "^2.5.0",
     "vue-date-time-picker": "^0.1.1",
-    "vue-moment": "^4.0.0",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.5",
     "vuex": "^3.0.1"
